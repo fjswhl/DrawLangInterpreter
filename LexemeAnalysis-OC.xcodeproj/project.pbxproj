@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3EE248EF1A0D090E0026B736 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE248EE1A0D090E0026B736 /* main.m */; };
+		3EE248F71A0D09410026B736 /* LINScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE248F61A0D09410026B736 /* LINScanner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		3EE248EB1A0D090E0026B736 /* LexemeAnalysis-OC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LexemeAnalysis-OC"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE248EE1A0D090E0026B736 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3EE248F51A0D09410026B736 /* LINScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LINScanner.h; sourceTree = "<group>"; };
+		3EE248F61A0D09410026B736 /* LINScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LINScanner.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				3EE248EE1A0D090E0026B736 /* main.m */,
+				3EE248F51A0D09410026B736 /* LINScanner.h */,
+				3EE248F61A0D09410026B736 /* LINScanner.m */,
 			);
 			path = "LexemeAnalysis-OC";
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE248F71A0D09410026B736 /* LINScanner.m in Sources */,
 				3EE248EF1A0D090E0026B736 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

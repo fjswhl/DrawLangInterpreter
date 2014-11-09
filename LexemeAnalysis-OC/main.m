@@ -7,11 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LINScanner.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
-        NSLog(@"Hello, World!");
+        Token token;
+        
+        LINScanner *aScanner = [[LINScanner alloc] initWithFilename:[NSString stringWithUTF8String:argv[1]]];
+        if (!aScanner) {
+            NSLog(@"cannot open file");
+        }
+        while (1) {
+            token = [aScanner getToken];
+            if (token.type != NONTOKEN) {
+       //         NSLog(@"%4lu, %12@, %12f, %12x", token.type, token.lexeme, token.value, token.fptr);
+                printf("%4d, %12s, %12f, %12x\n", (int)token.type, [token.lexeme cStringUsingEncoding:NSUTF8StringEncoding], token.value, token.fptr);
+
+            }else break;
+        }
+        
     }
     return 0;
 }
