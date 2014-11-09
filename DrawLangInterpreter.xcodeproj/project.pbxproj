@@ -24,7 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3EE248EB1A0D090E0026B736 /* LexemeAnalysis-OC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "LexemeAnalysis-OC"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EE248EB1A0D090E0026B736 /* DrawLangInterpreter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DrawLangInterpreter; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE248EE1A0D090E0026B736 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3EE248F51A0D09410026B736 /* LINScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LINScanner.h; sourceTree = "<group>"; };
 		3EE248F61A0D09410026B736 /* LINScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LINScanner.m; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		3EE248E21A0D090E0026B736 = {
 			isa = PBXGroup;
 			children = (
-				3EE248ED1A0D090E0026B736 /* LexemeAnalysis-OC */,
+				3EE248ED1A0D090E0026B736 /* DwawLangInterpreter */,
 				3EE248EC1A0D090E0026B736 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,27 +52,36 @@
 		3EE248EC1A0D090E0026B736 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3EE248EB1A0D090E0026B736 /* LexemeAnalysis-OC */,
+				3EE248EB1A0D090E0026B736 /* DrawLangInterpreter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3EE248ED1A0D090E0026B736 /* LexemeAnalysis-OC */ = {
+		3EE248ED1A0D090E0026B736 /* DwawLangInterpreter */ = {
 			isa = PBXGroup;
 			children = (
+				3EE248F81A0F47C50026B736 /* Lexical Analysis */,
 				3EE248EE1A0D090E0026B736 /* main.m */,
+			);
+			name = DwawLangInterpreter;
+			path = "LexemeAnalysis-OC";
+			sourceTree = "<group>";
+		};
+		3EE248F81A0F47C50026B736 /* Lexical Analysis */ = {
+			isa = PBXGroup;
+			children = (
 				3EE248F51A0D09410026B736 /* LINScanner.h */,
 				3EE248F61A0D09410026B736 /* LINScanner.m */,
 			);
-			path = "LexemeAnalysis-OC";
+			name = "Lexical Analysis";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3EE248EA1A0D090E0026B736 /* LexemeAnalysis-OC */ = {
+		3EE248EA1A0D090E0026B736 /* DrawLangInterpreter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3EE248F21A0D090E0026B736 /* Build configuration list for PBXNativeTarget "LexemeAnalysis-OC" */;
+			buildConfigurationList = 3EE248F21A0D090E0026B736 /* Build configuration list for PBXNativeTarget "DrawLangInterpreter" */;
 			buildPhases = (
 				3EE248E71A0D090E0026B736 /* Sources */,
 				3EE248E81A0D090E0026B736 /* Frameworks */,
@@ -82,9 +91,9 @@
 			);
 			dependencies = (
 			);
-			name = "LexemeAnalysis-OC";
+			name = DrawLangInterpreter;
 			productName = "LexemeAnalysis-OC";
-			productReference = 3EE248EB1A0D090E0026B736 /* LexemeAnalysis-OC */;
+			productReference = 3EE248EB1A0D090E0026B736 /* DrawLangInterpreter */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -101,7 +110,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3EE248E61A0D090E0026B736 /* Build configuration list for PBXProject "LexemeAnalysis-OC" */;
+			buildConfigurationList = 3EE248E61A0D090E0026B736 /* Build configuration list for PBXProject "DrawLangInterpreter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -113,7 +122,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3EE248EA1A0D090E0026B736 /* LexemeAnalysis-OC */,
+				3EE248EA1A0D090E0026B736 /* DrawLangInterpreter */,
 			);
 		};
 /* End PBXProject section */
@@ -208,21 +217,21 @@
 		3EE248F31A0D090E0026B736 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DrawLangInterpreter;
 			};
 			name = Debug;
 		};
 		3EE248F41A0D090E0026B736 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DrawLangInterpreter;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3EE248E61A0D090E0026B736 /* Build configuration list for PBXProject "LexemeAnalysis-OC" */ = {
+		3EE248E61A0D090E0026B736 /* Build configuration list for PBXProject "DrawLangInterpreter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3EE248F01A0D090E0026B736 /* Debug */,
@@ -231,13 +240,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3EE248F21A0D090E0026B736 /* Build configuration list for PBXNativeTarget "LexemeAnalysis-OC" */ = {
+		3EE248F21A0D090E0026B736 /* Build configuration list for PBXNativeTarget "DrawLangInterpreter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3EE248F31A0D090E0026B736 /* Debug */,
 				3EE248F41A0D090E0026B736 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -14,7 +14,7 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         Token token;
         
-        LINScanner *aScanner = [[LINScanner alloc] initWithFilename:[NSString stringWithUTF8String:argv[1]]];
+        LINScanner *aScanner = [[LINScanner alloc] initWithFilename:@"aa"];
         if (!aScanner) {
             NSLog(@"cannot open file");
         }
@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
 
             }else break;
         }
-        
+
     }
     return 0;
 }

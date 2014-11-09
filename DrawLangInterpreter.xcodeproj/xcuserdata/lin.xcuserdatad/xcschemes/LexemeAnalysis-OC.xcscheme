@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3EE248EA1A0D090E0026B736"
-               BuildableName = "LexemeAnalysis-OC"
-               BlueprintName = "LexemeAnalysis-OC"
-               ReferencedContainer = "container:LexemeAnalysis-OC.xcodeproj">
+               BuildableName = "DrawLangInterpreter"
+               BlueprintName = "DrawLangInterpreter"
+               ReferencedContainer = "container:DrawLangInterpreter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3EE248EA1A0D090E0026B736"
-            BuildableName = "LexemeAnalysis-OC"
-            BlueprintName = "LexemeAnalysis-OC"
-            ReferencedContainer = "container:LexemeAnalysis-OC.xcodeproj">
+            BuildableName = "DrawLangInterpreter"
+            BlueprintName = "DrawLangInterpreter"
+            ReferencedContainer = "container:DrawLangInterpreter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3EE248EA1A0D090E0026B736"
-            BuildableName = "LexemeAnalysis-OC"
-            BlueprintName = "LexemeAnalysis-OC"
-            ReferencedContainer = "container:LexemeAnalysis-OC.xcodeproj">
+            BuildableName = "DrawLangInterpreter"
+            BlueprintName = "DrawLangInterpreter"
+            ReferencedContainer = "container:DrawLangInterpreter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3EE248EA1A0D090E0026B736"
-            BuildableName = "LexemeAnalysis-OC"
-            BlueprintName = "LexemeAnalysis-OC"
-            ReferencedContainer = "container:LexemeAnalysis-OC.xcodeproj">
+            BuildableName = "DrawLangInterpreter"
+            BlueprintName = "DrawLangInterpreter"
+            ReferencedContainer = "container:DrawLangInterpreter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

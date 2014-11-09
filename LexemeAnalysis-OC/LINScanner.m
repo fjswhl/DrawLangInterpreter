@@ -30,9 +30,14 @@ Token TokenTab[] = {
 };
 
 @implementation LINScanner{
-    NSInteger _lineNo;
-    FILE *_inFile;
     NSString *_tokenBuffer;
+    
+    // for storing inputed file's contents
+    NSString *_fileContents;
+    
+    NSUInteger _offset;
+    NSUInteger _fileLength;
+    NSUInteger _lineNo;
 }
 
 //+ (instancetype)sharedScanner{
@@ -44,44 +49,38 @@ Token TokenTab[] = {
 //    return sharedScanner;
 //}
 
-- (instancetype)init{
-    if (self = [super init]) {
-       // Token *aToken = [Token alloc] init
-    }
-    return self;
-}
 
 - (instancetype)initWithFilename:(NSString *)fileName{
     if (self = [super init]) {
-        _lineNo = 1;
-        _inFile = fopen([fileName cStringUsingEncoding:NSUTF8StringEncoding], "r");
-        if (_inFile != NULL) {
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm fileExistsAtPath:fileName]) {
+            _fileContents = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:nil];
+            _offset = 0;
+            _lineNo = 1;
+            _fileLength = [_fileContents length];
+        }
+       // NSLog(@"%@", _fileContents);
+        if (_fileContents != nil) {
             return self;
         }
     }
     return nil;
 }
 
-- (void)dealloc{
-    fclose(_inFile);
-}
-
-- (char)getChar{
-    int character = getc(_inFile);
-    return toupper(character);
-}
-
-- (void)backChar:(char) character{
-    if (character != EOF) {
-        ungetc(character, _inFile);
+- (unichar)getChar{
+    if (_offset != _fileLength) {
+        return toupper([_fileContents characterAtIndex:_offset++]);   //TODO TEST
     }
+    return 0;
 }
 
-- (void)addCharToTokenString:(char)character{
-    char *p = malloc(sizeof(character));
-    *p = character;
-    _tokenBuffer = [_tokenBuffer stringByAppendingString:[NSString stringWithCString:p encoding:NSUTF8StringEncoding]];
-    free(p);
+- (void)backChar{
+    _offset--;
+}
+
+- (void)addCharToTokenString:(unichar)character{
+
+    _tokenBuffer = [_tokenBuffer stringByAppendingString:[NSString stringWithCharacters:&character length:1]];
 }
 
 - (Token)judgeKeyToken:(NSString *)IDString{
@@ -99,7 +98,8 @@ Token TokenTab[] = {
 
 - (Token)getToken{
     Token token;
-    int character;
+    
+    unichar character;
     
     memset(&token, 0, sizeof(token));
     
@@ -108,7 +108,7 @@ Token TokenTab[] = {
     // clear blank character
     while (1) {
         character = [self getChar];
-        if (character == EOF) {
+        if (character == 0) {
             token.type = NONTOKEN;
             return token;
         }
@@ -132,7 +132,7 @@ Token TokenTab[] = {
                 break;
             }
         }
-        [self backChar:character];
+        [self backChar];
         token = [self judgeKeyToken:_tokenBuffer];
         token.lexeme = _tokenBuffer;                    //TODO TEST
         return token;
@@ -153,10 +153,10 @@ Token TokenTab[] = {
             }
         }
         
-        [self backChar:character];
+        [self backChar];
         token.type = CONST_ID;
         token.lexeme = _tokenBuffer;
-        token.value = atof([_tokenBuffer cStringUsingEncoding:NSUTF8StringEncoding]);
+        token.value = [_tokenBuffer doubleValue];
         return token;
     }else{
         switch (character) {
@@ -174,13 +174,13 @@ Token TokenTab[] = {
             case '-':{
                 character = [self getChar];
                 if (character == '-') {
-                    while (character != '\n' && character != EOF) {
+                    while (character != '\n' && character != 0) {
                         character = [self getChar];
                     }
-                    [self backChar:character];
+                    [self backChar];
                     return [self getToken];
                 }else{
-                    [self backChar:character];
+                    [self backChar];
                     token.type = MINUS;
                     break;
                 }
@@ -191,10 +191,10 @@ Token TokenTab[] = {
                     while (character != '\n') {
                         character = [self getChar];
                     }
-                    [self backChar:character];
+                    [self backChar];
                     return [self getToken];
                 }else{
-                    [self backChar:character];
+                    [self backChar];
                     token.type = DIV;
                     break;
                 }
@@ -205,7 +205,7 @@ Token TokenTab[] = {
                     token.type = POWER;
                     break;
                 }else{
-                    [self backChar:character];
+                    [self backChar];
                     token.type = MUL;
                     break;
                 }
