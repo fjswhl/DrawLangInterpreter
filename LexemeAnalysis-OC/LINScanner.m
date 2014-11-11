@@ -58,6 +58,7 @@ Token TokenTab[] = {
             _offset = 0;
             _lineNo = 1;
             _fileLength = [_fileContents length];
+
         }
        // NSLog(@"%@", _fileContents);
         if (_fileContents != nil) {

@@ -17,12 +17,13 @@ int main(int argc, const char * argv[]) {
         LINScanner *aScanner = [[LINScanner alloc] initWithFilename:@"aa"];
         if (!aScanner) {
             NSLog(@"cannot open file");
+            return 0;
         }
         while (1) {
             token = [aScanner getToken];
             if (token.type != NONTOKEN) {
        //         NSLog(@"%4lu, %12@, %12f, %12x", token.type, token.lexeme, token.value, token.fptr);
-                printf("%4d, %12s, %12f, %12x\n", (int)token.type, [token.lexeme cStringUsingEncoding:NSUTF8StringEncoding], token.value, token.fptr);
+                printf("%4d, %12s, %12f, %12x\n", (int)token.type, [token.lexeme cStringUsingEncoding:NSUTF8StringEncoding], token.value, (unsigned int)token.fptr);
 
             }else break;
         }
