@@ -35,10 +35,14 @@ Token TokenTab[] = {
     // for storing inputed file's contents
     NSString *_fileContents;
     
-    NSUInteger _offset;
+    // range for a token buffer
+    NSUInteger _offsetEnd;
+    NSUInteger _offsetBegin;
+    
     NSUInteger _fileLength;
     NSUInteger _lineNo;
 }
+
 
 //+ (instancetype)sharedScanner{
 //    static LINScanner *sharedScanner = nil;
@@ -55,10 +59,8 @@ Token TokenTab[] = {
         NSFileManager *fm = [NSFileManager defaultManager];
         if ([fm fileExistsAtPath:fileName]) {
             _fileContents = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:nil];
-            _offset = 0;
             _lineNo = 1;
             _fileLength = [_fileContents length];
-
         }
        // NSLog(@"%@", _fileContents);
         if (_fileContents != nil) {
@@ -68,43 +70,13 @@ Token TokenTab[] = {
     return nil;
 }
 
-- (unichar)getChar{
-    if (_offset != _fileLength) {
-        return toupper([_fileContents characterAtIndex:_offset++]);   //TODO TEST
-    }
-    return 0;
-}
-
-- (void)backChar{
-    _offset--;
-}
-
-- (void)addCharToTokenString:(unichar)character{
-
-    _tokenBuffer = [_tokenBuffer stringByAppendingString:[NSString stringWithCharacters:&character length:1]];
-}
-
-- (Token)judgeKeyToken:(NSString *)IDString{
-    for (int i = 0; i < sizeof(TokenTab) / sizeof(TokenTab[0]); i++) {
-        if ([TokenTab[i].lexeme isEqualToString: IDString]) {
-            return TokenTab[i];
-        }
-    }
-    
-    Token errorToken;
-    memset(&errorToken, 0, sizeof(Token));
-    errorToken.type = ERRTOKEN;
-    return errorToken;
-}
 
 - (Token)getToken{
     Token token;
     unichar character;
     memset(&token, 0, sizeof(token));
     
-    _tokenBuffer = @"";
-    
-    // clear blank character
+    _offsetBegin = _offsetEnd;
     while (1) {
         character = [self getChar];
         if (character == 0) {
@@ -118,16 +90,13 @@ Token TokenTab[] = {
             break;
         }
     }
-    
-    [self addCharToTokenString:character];
+    _offsetBegin = _offsetEnd - 1;
     
     // if it is alpha, it must be id,constant,reserved word
     if (isalpha(character)) {
         while (1) {
             character = [self getChar];
-            if (isalnum(character)) {
-                [self addCharToTokenString:character];
-            }else{
+            if (!isalnum(character)) {
                 break;
             }
         }
@@ -138,17 +107,16 @@ Token TokenTab[] = {
     }else if (isdigit(character)){              //number
         while (1) {
             character = [self getChar];
-            if (isdigit(character)) {
-                [self addCharToTokenString:character];
-            }else break;
+            if (!isdigit(character)) {
+                break;
+            }
         }
         if (character == '.') {
-            [self addCharToTokenString:character];
             while (1) {
                 character = [self getChar];
-                if (isdigit(character)) {
-                    [self addCharToTokenString:character];
-                }else break;
+                if (!isdigit(character)) {
+                    break;
+                }
             }
         }
         
@@ -160,16 +128,15 @@ Token TokenTab[] = {
     }else{
         switch (character) {
             case ';':
-                token.type = SEMICO;
-                break;
+                token.type = SEMICO; break;
             case '(':
-                token.type = L_BRACKET;break;
+                token.type = L_BRACKET; break;
             case ')':
-                token.type = R_BRACKET;break;
+                token.type = R_BRACKET; break;
             case ',':
-                token.type = COMMA;break;
+                token.type = COMMA; break;
             case '+':
-                token.type = PLUS;break;
+                token.type = PLUS; break;
             case '-':{
                 character = [self getChar];
                 if (character == '-') {
@@ -213,9 +180,45 @@ Token TokenTab[] = {
                 break;
         }
     }
+    [self calTokenBuffer];
     token.lexeme = _tokenBuffer;
     return token;
 }
+
+#pragma mark -- helper method
+
+/**
+ *  后退字符指针，并计算tokenbuffer
+ */
+- (void)backChar{
+    _offsetEnd--;
+    [self calTokenBuffer];
+}
+
+- (void)calTokenBuffer{
+    _tokenBuffer = [_fileContents substringWithRange:NSMakeRange(_offsetBegin, _offsetEnd-_offsetBegin)];
+}
+
+- (unichar)getChar{
+    if (_offsetEnd != _fileLength) {
+        return toupper([_fileContents characterAtIndex:_offsetEnd++]);   //TODO TEST
+    }
+    return 0;
+}
+
+- (Token)judgeKeyToken:(NSString *)IDString{
+    for (int i = 0; i < sizeof(TokenTab) / sizeof(TokenTab[0]); i++) {
+        if ([TokenTab[i].lexeme isEqualToString: IDString]) {
+            return TokenTab[i];
+        }
+    }
+    
+    Token errorToken;
+    memset(&errorToken, 0, sizeof(Token));
+    errorToken.type = ERRTOKEN;
+    return errorToken;
+}
+
 @end
 
 
