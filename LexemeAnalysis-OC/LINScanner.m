@@ -99,9 +99,7 @@ Token TokenTab[] = {
 
 - (Token)getToken{
     Token token;
-    
     unichar character;
-    
     memset(&token, 0, sizeof(token));
     
     _tokenBuffer = @"";
